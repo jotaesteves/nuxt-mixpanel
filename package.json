@@ -1,0 +1,35 @@
+{
+  "name": "nuxt-mixpanel",
+  "version": "1.0.0",
+  "description": "Unofficial NuxtJs module for Mixpanel",
+  "main": "src/module.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jotaesteves/nuxt-mixpanel.git"
+  },
+  "keywords": [
+    "nuxtjs",
+    "nuxt",
+    "module",
+    "mixpanel",
+    "vue-mixpanel",
+    "nuxt-mixpanel",
+    "mixpanel-browser"
+  ],
+  "author": "Jorge Esteves <jorgeestevesdev@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jotaesteves/nuxt-mixpanel/issues"
+  },
+  "homepage": "https://github.com/jotaesteves/nuxt-mixpanel#readme",
+  "dependencies": {
+    "mixpanel-browser": "^2.45.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.26.0",
+    "eslint-plugin-vue": "^9.6.0"
+  }
+}
