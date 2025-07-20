@@ -19,9 +19,6 @@ updates:
       prefix: "chore"
       prefix-development: "chore"
       include: "scope"
-    labels:
-      - "dependencies"
-      - "npm"
     # Group updates for common dependency types
     groups:
       babel:
@@ -66,6 +63,3 @@ updates:
     commit-message:
       prefix: "ci"
       include: "scope"
-    labels:
-      - "dependencies"
-      - "github-actions"
