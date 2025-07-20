@@ -18,11 +18,11 @@ export default {
         timestamp: new Date().toISOString()
       });
     },
-    
+
     identifyUser(userId, userProps = {}) {
       // Identify the user
       this.$mixpanel.identify(userId);
-      
+
       // Set user properties
       this.$mixpanel.people.set({
         '$email': userProps.email,
@@ -40,14 +40,14 @@ export const actions = {
     try {
       const user = await this.$auth.login(credentials);
       commit('SET_USER', user);
-      
+
       // Track login event
       this.$mixpanel.track('User Login', {
         method: 'email',
         success: true,
         timestamp: new Date().toISOString()
       });
-      
+
       // Identify user in Mixpanel
       this.$mixpanel.identify(user.id);
       this.$mixpanel.people.set({
@@ -55,7 +55,7 @@ export const actions = {
         '$name': user.name,
         '$last_login': new Date().toISOString()
       });
-      
+
       return user;
     } catch (error) {
       this.$mixpanel.track('User Login', {
@@ -67,7 +67,7 @@ export const actions = {
       throw error;
     }
   },
-  
+
   async purchase({ commit }, { productId, amount, currency = 'USD' }) {
     // Track purchase event
     this.$mixpanel.track('Purchase', {
@@ -76,7 +76,7 @@ export const actions = {
       currency: currency,
       timestamp: new Date().toISOString()
     });
-    
+
     // Track revenue
     this.$mixpanel.people.track_charge(amount, {
       product_id: productId,
@@ -95,7 +95,7 @@ export default function({ $mixpanel, error }) {
       timestamp: new Date().toISOString()
     });
   }
-  
+
   // Track page views globally (if not using router integration)
   if (process.client) {
     window.addEventListener('beforeunload', () => {
@@ -113,14 +113,14 @@ export default {
   async asyncData({ $mixpanel, params, error }) {
     try {
       const data = await fetchData(params.id);
-      
+
       // Track successful data load
       $mixpanel.track('Data Loaded', {
         data_type: 'product',
         data_id: params.id,
         timestamp: new Date().toISOString()
       });
-      
+
       return { data };
     } catch (err) {
       // Track data loading error
@@ -130,7 +130,7 @@ export default {
         error: err.message,
         timestamp: new Date().toISOString()
       });
-      
+
       error({ statusCode: 500, message: 'Data loading failed' });
     }
   }
@@ -144,14 +144,14 @@ export default function({ $mixpanel, route, redirect }) {
     to: route.path,
     timestamp: new Date().toISOString()
   });
-  
+
   // Track protected route access
   if (route.meta?.requiresAuth && !$auth.loggedIn) {
     $mixpanel.track('Unauthorized Access Attempt', {
       route: route.path,
       timestamp: new Date().toISOString()
     });
-    
+
     return redirect('/login');
   }
 }

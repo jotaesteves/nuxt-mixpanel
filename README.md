@@ -26,14 +26,12 @@ Add the module to your `nuxt.config.js`:
 
 ```javascript
 export default {
-  modules: [
-    'nuxt-mixpanel'
-  ],
+  modules: ["nuxt-mixpanel"],
 
   mixpanel: {
-    token: 'YOUR_MIXPANEL_TOKEN'
-  }
-}
+    token: "YOUR_MIXPANEL_TOKEN",
+  },
+};
 ```
 
 ## Configuration
@@ -51,17 +49,17 @@ MIXPANEL_TOKEN=your_token_here
 ```javascript
 export default {
   mixpanel: {
-    token: 'YOUR_MIXPANEL_TOKEN',
+    token: "YOUR_MIXPANEL_TOKEN",
     config: {
       debug: true,
       track_pageview: true,
-      persistence: 'localStorage'
+      persistence: "localStorage",
     },
-    name: 'mixpanel', // optional
+    name: "mixpanel", // optional
     disabled: false, // optional
-    useRouter: true // optional, enables automatic page tracking
-  }
-}
+    useRouter: true, // optional, enables automatic page tracking
+  },
+};
 ```
 
 ## Usage
@@ -72,21 +70,21 @@ export default {
 export default {
   mounted() {
     // Track an event
-    this.$mixpanel.track('Button Clicked', {
-      button: 'header-cta',
-      page: this.$route.path
+    this.$mixpanel.track("Button Clicked", {
+      button: "header-cta",
+      page: this.$route.path,
     });
 
     // Identify a user
-    this.$mixpanel.identify('user-123');
+    this.$mixpanel.identify("user-123");
 
     // Set user properties
     this.$mixpanel.people.set({
-      '$email': 'user@example.com',
-      '$name': 'John Doe'
+      $email: "user@example.com",
+      $name: "John Doe",
     });
-  }
-}
+  },
+};
 ```
 
 ### In Vuex store
@@ -97,15 +95,15 @@ export default {
   actions: {
     login({ commit }, user) {
       // Your login logic
-      commit('SET_USER', user);
-      
+      commit("SET_USER", user);
+
       // Track login event
-      this.$mixpanel.track('User Login', {
-        method: 'email'
+      this.$mixpanel.track("User Login", {
+        method: "email",
       });
-    }
-  }
-}
+    },
+  },
+};
 ```
 
 ### In asyncData or plugins
@@ -113,11 +111,11 @@ export default {
 ```javascript
 export default {
   asyncData({ $mixpanel }) {
-    $mixpanel.track('Page Loaded', {
-      page: 'home'
+    $mixpanel.track("Page Loaded", {
+      page: "home",
     });
-  }
-}
+  },
+};
 ```
 
 ## Automatic Page Tracking

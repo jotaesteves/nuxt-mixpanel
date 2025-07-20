@@ -5,45 +5,42 @@ module.exports = {
     node: true,
     es2021: true,
   },
-  extends: [
-    'eslint:recommended',
-    'plugin:vue/essential'
-  ],
+  extends: ["eslint:recommended", "plugin:vue/essential"],
   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
+    ecmaVersion: "latest",
+    sourceType: "module",
   },
-  plugins: ['vue'],
+  plugins: ["vue"],
   rules: {
-    'no-console': 'off',
-    'no-unused-vars': 'warn',
-    'prefer-const': 'error',
-    'no-var': 'error',
-    'vue/multi-word-component-names': 'off'
+    "no-console": "off",
+    "no-unused-vars": "warn",
+    "prefer-const": "error",
+    "no-var": "error",
+    "vue/multi-word-component-names": "off",
   },
   overrides: [
     {
-      files: ['test/**/*.js', '**/*.test.js', '**/*.spec.js'],
+      files: ["test/**/*.js", "**/*.test.js", "**/*.spec.js"],
       env: {
-        jest: true
+        jest: true,
       },
       rules: {
-        'no-undef': 'off'
-      }
+        "no-undef": "off",
+      },
     },
     {
-      files: ['types/**/*.d.ts'],
-      parser: '@typescript-eslint/parser',
+      files: ["types/**/*.d.ts"],
+      parser: "@typescript-eslint/parser",
       rules: {
-        'no-unused-vars': 'off'
-      }
+        "no-unused-vars": "off",
+      },
     },
     {
-      files: ['examples/**/*.js'],
+      files: ["examples/**/*.js"],
       rules: {
-        'no-undef': 'off',
-        'no-unused-vars': 'off'
-      }
-    }
-  ]
+        "no-undef": "off",
+        "no-unused-vars": "off",
+      },
+    },
+  ],
 };

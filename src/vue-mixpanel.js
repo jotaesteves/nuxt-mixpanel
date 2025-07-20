@@ -5,21 +5,21 @@
  * Copyright 2020, cmp-cc
  * Released under the MIT license
  */
-import mixpanel from 'mixpanel-browser';
-const consola = require('consola').withScope('nuxt:mixpanel');
+import mixpanel from "mixpanel-browser";
+const consola = require("consola").withScope("nuxt:mixpanel");
 
 const VueMixpanel = {};
 
 Object.assign(VueMixpanel, {
   install(Vue, options) {
-    if (typeof options !== 'object') options = {};
+    if (typeof options !== "object") options = {};
 
     Vue.prototype.$mixpanel = mixpanel;
 
     const defaultConfig = {};
     const debug = {
       loaded() {
-        consola.success('✔ Mixpanel reporting is enabled');
+        consola.success("✔ Mixpanel reporting is enabled");
       },
     };
     const endConfig = Object.assign(options, defaultConfig);
@@ -28,16 +28,12 @@ Object.assign(VueMixpanel, {
       Object.assign(endConfig, debug);
     }
 
-    Vue.prototype.$mixpanel.init(
-      options.token,
-      endConfig,
-      options.name || null
-    );
+    Vue.prototype.$mixpanel.init(options.token, endConfig, options.name || null);
 
     if (options.router) {
       try {
         options.router.afterEach((to) => {
-          Vue.prototype.$mixpanel.track('Page Viewed', {
+          Vue.prototype.$mixpanel.track("Page Viewed", {
             url: to.fullPath,
           });
         });
