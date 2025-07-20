@@ -52,8 +52,8 @@ updates:
         update-types: ["version-update:semver-major"]
       - dependency-name: "mixpanel-browser"
         update-types: ["version-update:semver-major"]
-    # Enable security updates
-    insecure-external-code-execution: "allow"
+
+  # Enable version updates for GitHub Actions
 
   # Enable version updates for GitHub Actions
   - package-ecosystem: "github-actions"
