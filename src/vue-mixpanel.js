@@ -22,13 +22,18 @@ Object.assign(VueMixpanel, {
         consola.success("✔ Mixpanel reporting is enabled");
       },
     };
-    const endConfig = Object.assign(options, defaultConfig);
+    const endConfig = Object.assign(defaultConfig, options.config || {});
 
-    if (options.config.debug) {
+    if (options.config && options.config.debug) {
       Object.assign(endConfig, debug);
     }
 
-    Vue.prototype.$mixpanel.init(options.token, endConfig, options.name || null);
+    try {
+      Vue.prototype.$mixpanel.init(options.token, endConfig, options.name || null);
+    } catch (error) {
+      consola.error("Failed to initialize Mixpanel:", error.message);
+      return;
+    }
 
     if (options.router) {
       try {
