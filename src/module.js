@@ -1,7 +1,7 @@
 const path = require('path');
-const logger = require('consola').withScope('nuxt:mixpanel');
+const consola = require('consola').withScope('nuxt:mixpanel');
 
-function bakeModule(moduleOptions) {
+function mixpanelModule(moduleOptions) {
   const options = Object.assign(
     {
       token: process.env.MIXPANEL_TOKEN,
@@ -20,12 +20,18 @@ function bakeModule(moduleOptions) {
   };
 
   if (options.disabled) {
-    logger.info('Disabled, skipping plugin injection');
+    consola.info('Mixpanel module disabled, skipping plugin injection');
     return;
   }
 
+  if (!options.token) {
+    consola.warn('Mixpanel token not provided. Module will not work properly.');
+  }
+
   this.addPlugin(pluginOpts);
+  
+  consola.success('Mixpanel module initialized');
 }
 
-module.exports = bakeModule;
-module.exports = module.exports.meta = require('../package.json');
+module.exports = mixpanelModule;
+module.exports.meta = require('../package.json');

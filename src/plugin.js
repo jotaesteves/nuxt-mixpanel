@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueMixpanel from './vue-mixpanel.js';
 
 function shouldUseRouter(moduleOptions, $config) {
-  return moduleOptions.useRouter ?? $config.MIXPANEL_USE_ROUTER ?? true;
+  return moduleOptions.useRouter ?? $config?.MIXPANEL_USE_ROUTER ?? true;
 }
 
 const OPTIONS = '<%= JSON.stringify(options) %>';
@@ -13,7 +13,7 @@ export default function (context, inject) {
   const moduleOptions = JSON.parse(OPTIONS);
 
   const options = {
-    token: process.env.mixpanelToken || ($config && $config.mixpanelToken),
+    token: moduleOptions.token || process.env.mixpanelToken || ($config && $config.mixpanelToken),
     config: moduleOptions.config || ($config && $config.mixpanelConfig) || {},
     name: moduleOptions.name || ($config && $config.mixpanelName) || null,
   };
@@ -27,12 +27,12 @@ export default function (context, inject) {
   Vue.use(VueMixpanel, options);
 
   if (store) {
-    store.$mixpanel = Vue.$mixpanel;
+    store.$mixpanel = Vue.prototype.$mixpanel;
   }
 
-  context.$mixpanel = Vue.$mixpanel;
+  context.$mixpanel = Vue.prototype.$mixpanel;
 
-  if (Vue.$mixpanel) {
-    inject('mixpanel', Vue.$mixpanel);
+  if (Vue.prototype.$mixpanel) {
+    inject('mixpanel', Vue.prototype.$mixpanel);
   }
 }

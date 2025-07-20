@@ -19,7 +19,7 @@ Object.assign(VueMixpanel, {
     const defaultConfig = {};
     const debug = {
       loaded() {
-        logger.success('✔ Mixpanel reporting is enabled');
+        consola.success('✔ Mixpanel reporting is enabled');
       },
     };
     const endConfig = Object.assign(options, defaultConfig);
@@ -41,9 +41,9 @@ Object.assign(VueMixpanel, {
             url: to.fullPath,
           });
         });
-        logger.success(`✔ Mixpanel router is enabled`);
+        consola.success(`✔ Mixpanel router is enabled`);
       } catch (error) {
-        logger.error(`Mixpanel router is disabled (${error})`);
+        consola.error(`Mixpanel router is disabled (${error})`);
       }
     }
   },
